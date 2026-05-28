@@ -1,0 +1,624 @@
+<style>
+  @import url('https://fonts.googleapis.com/css2?family=Noto+Sans+JP:wght@400;500;700;900&family=Zen+Kaku+Gothic+New:wght@500;700;900&display=swap');
+  :root {
+    --mk-ink: #181326;
+    --mk-muted: #6f6a7d;
+    --mk-paper: #ffffff;
+    --mk-soft: #f8f5ff;
+    --mk-line: rgba(86, 72, 126, 0.16);
+    --mk-deep: #22153f;
+    --mk-indigo: #6554f2;
+    --mk-violet: #9b5cf6;
+    --mk-teal: #0d9488;
+    --mk-rose: #e64f86;
+    --mk-gold: #f4bc4b;
+    --mk-shadow: 0 22px 70px rgba(49, 33, 92, 0.14);
+  }
+  .mk-archive {
+    margin: 0;
+    color: var(--mk-ink);
+    background: linear-gradient(180deg, #f8f5ff 0%, #ffffff 34%, #f6fbff 72%, #fff8fb 100%);
+    font-family: "Noto Sans JP", "Hiragino Sans", "Yu Gothic", "YuGothic", sans-serif;
+    line-height: 1.75;
+  }
+  .mk-archive * { box-sizing: border-box; }
+  .mk-archive a { color: inherit; text-decoration: none; }
+  .mk-shell {
+    width: min(1120px, calc(100% - 32px));
+    margin: 0 auto;
+  }
+  .mk-hero {
+    position: relative;
+    overflow: hidden;
+    color: #ffffff;
+    background: linear-gradient(135deg, #22153f 0%, #5b3fb4 48%, #0f7f7a 100%);
+    padding: 72px 0 56px;
+  }
+  .mk-hero::before,
+  .mk-hero::after {
+    content: "";
+    position: absolute;
+    border-radius: 999px;
+    filter: blur(8px);
+    opacity: 0.3;
+  }
+  .mk-hero::before {
+    width: 420px;
+    height: 420px;
+    right: -140px;
+    top: -120px;
+    background: radial-gradient(circle, rgba(244, 188, 75, 0.82), rgba(244, 188, 75, 0));
+  }
+  .mk-hero::after {
+    width: 300px;
+    height: 300px;
+    left: -100px;
+    bottom: -120px;
+    background: radial-gradient(circle, rgba(83, 243, 225, 0.78), rgba(83, 243, 225, 0));
+  }
+  .mk-kicker {
+    margin: 0 0 12px;
+    letter-spacing: 0.14em;
+    font-size: 12px;
+    text-transform: uppercase;
+    color: rgba(255, 255, 255, 0.78);
+  }
+  .mk-hero h1 {
+    margin: 0;
+    font-family: "Zen Kaku Gothic New", "Noto Sans JP", sans-serif;
+    font-weight: 900;
+    font-size: clamp(34px, 5.6vw, 58px);
+    line-height: 1.08;
+    letter-spacing: 0;
+  }
+  .mk-title-sub {
+    display: block;
+    margin-top: 12px;
+    font-size: clamp(20px, 3vw, 34px);
+    line-height: 1.25;
+    color: rgba(255, 255, 255, 0.86);
+  }
+  .mk-title-main {
+    color: #ffffff;
+    font-size: clamp(30px, 4.6vw, 52px);
+  }
+  .mk-title-sub-small {
+    font-size: clamp(18px, 2.4vw, 28px);
+  }
+  .mk-hero-copy {
+    position: relative;
+    z-index: 1;
+    max-width: 920px;
+  }
+  .mk-hero-copy p {
+    margin: 18px 0 0;
+    font-size: 17px;
+    color: rgba(255, 255, 255, 0.9);
+  }
+  .mk-pill-row,
+  .mk-action-row {
+    display: flex;
+    flex-wrap: wrap;
+    gap: 10px;
+    margin-top: 22px;
+  }
+  .mk-pill {
+    border: 1px solid rgba(255, 255, 255, 0.24);
+    border-radius: 999px;
+    padding: 10px 14px;
+    background: rgba(255, 255, 255, 0.11);
+    font-size: 13px;
+  }
+  .mk-submit-button,
+  .mk-secondary-button,
+  .mk-slide-button,
+  .mk-link-button {
+    display: inline-flex;
+    align-items: center;
+    justify-content: center;
+    border-radius: 999px;
+    padding: 12px 18px;
+    font-weight: 800;
+  }
+  .mk-submit-button {
+    background: linear-gradient(135deg, var(--mk-gold), #ff8a5c);
+    color: #271100 !important;
+    box-shadow: 0 16px 38px rgba(244, 188, 75, 0.28);
+  }
+  .mk-slide-button {
+    border: 1px solid rgba(255, 255, 255, 0.42);
+    background: #ffffff;
+    color: var(--mk-deep) !important;
+    box-shadow: 0 16px 38px rgba(255, 255, 255, 0.18);
+  }
+  .mk-secondary-button {
+    border: 1px solid rgba(255, 255, 255, 0.34);
+    color: #ffffff !important;
+    background: rgba(255, 255, 255, 0.1);
+  }
+  .mk-section .mk-secondary-button {
+    border-color: rgba(101, 84, 242, 0.2);
+    color: var(--mk-indigo) !important;
+    background: rgba(101, 84, 242, 0.06);
+  }
+  .mk-section .mk-slide-button {
+    background: linear-gradient(135deg, var(--mk-indigo), var(--mk-teal));
+    color: #ffffff !important;
+    border-color: rgba(101, 84, 242, 0.2);
+  }
+  .mk-metrics {
+    display: grid;
+    grid-template-columns: repeat(3, minmax(0, 1fr));
+    gap: 14px;
+    margin-top: 32px;
+  }
+  .mk-metric {
+    border: 1px solid rgba(255, 255, 255, 0.18);
+    border-radius: 14px;
+    padding: 18px 20px;
+    background: rgba(255, 255, 255, 0.1);
+    backdrop-filter: blur(10px);
+  }
+  .mk-metric span {
+    display: block;
+    font-size: 12px;
+    color: rgba(255, 255, 255, 0.72);
+    text-transform: uppercase;
+    letter-spacing: 0.12em;
+  }
+  .mk-metric strong {
+    display: block;
+    margin-top: 8px;
+    font-size: 24px;
+    line-height: 1.2;
+  }
+  .mk-section {
+    padding: 72px 0;
+  }
+  .mk-section-tight {
+    padding-top: 0;
+  }
+  .mk-section-head {
+    max-width: 760px;
+    margin-bottom: 28px;
+  }
+  .mk-section .mk-kicker {
+    color: var(--mk-violet);
+  }
+  .mk-section-head h2 {
+    margin: 0;
+    font-family: "Zen Kaku Gothic New", "Noto Sans JP", sans-serif;
+    font-weight: 900;
+    font-size: clamp(28px, 4vw, 40px);
+    line-height: 1.12;
+    letter-spacing: 0;
+  }
+  .mk-section-head p:last-child {
+    margin: 14px 0 0;
+    color: var(--mk-muted);
+  }
+  .mk-summary-grid,
+  .mk-day-grid,
+  .mk-video-grid,
+  .mk-qa-grid,
+  .mk-support-grid,
+  .mk-check-grid {
+    display: grid;
+    gap: 18px;
+  }
+  .mk-upcoming-grid {
+    display: grid;
+    gap: 16px;
+    grid-template-columns: repeat(3, minmax(0, 1fr));
+  }
+  .mk-summary-grid {
+    grid-template-columns: 1.15fr 0.85fr;
+    align-items: start;
+  }
+  .mk-check-grid {
+    grid-template-columns: repeat(3, minmax(0, 1fr));
+  }
+  .mk-panel,
+  .mk-day-card,
+  .mk-video-card,
+  .mk-qa-card,
+  .mk-support-card {
+    background: var(--mk-paper);
+    border: 1px solid var(--mk-line);
+    border-radius: 24px;
+    box-shadow: var(--mk-shadow);
+  }
+  .mk-panel {
+    padding: 28px;
+  }
+  .mk-panel p {
+    margin: 0 0 16px;
+  }
+  .mk-panel ul,
+  .mk-day-card ul {
+    margin: 0;
+    padding-left: 18px;
+  }
+  .mk-panel li,
+  .mk-day-card li {
+    margin-top: 8px;
+  }
+  .mk-note {
+    background: linear-gradient(135deg, rgba(101, 84, 242, 0.08), rgba(13, 148, 136, 0.08));
+  }
+  .mk-note h3,
+  .mk-day-card h3,
+  .mk-video-card h3,
+  .mk-support-card h3,
+  .mk-qa-body h3 {
+    margin: 0 0 12px;
+    font-family: "Zen Kaku Gothic New", "Noto Sans JP", sans-serif;
+    font-weight: 800;
+    font-size: 22px;
+    line-height: 1.25;
+    letter-spacing: 0;
+  }
+  .mk-day-grid,
+  .mk-video-grid {
+    grid-template-columns: 1fr;
+  }
+  .mk-day-card,
+  .mk-support-card {
+    padding: 22px;
+  }
+  .mk-day-card-top,
+  .mk-video-card-head {
+    display: flex;
+    align-items: flex-start;
+    justify-content: space-between;
+    gap: 12px;
+  }
+  .mk-day-chip,
+  .mk-status-chip,
+  .mk-status-pill {
+    display: inline-flex;
+    align-items: center;
+    border-radius: 999px;
+    padding: 6px 10px;
+    font-size: 12px;
+    font-weight: 700;
+  }
+  .mk-day-chip {
+    background: rgba(101, 84, 242, 0.1);
+    color: var(--mk-indigo);
+  }
+  .mk-status-chip {
+    background: rgba(244, 188, 75, 0.18);
+    color: #7a4b08;
+    text-align: right;
+  }
+  .mk-status-pill {
+    background: rgba(101, 84, 242, 0.11);
+    color: var(--mk-indigo);
+  }
+  .mk-status-ok {
+    background: rgba(15, 118, 110, 0.12);
+    color: var(--mk-teal);
+  }
+  .mk-day-card p,
+  .mk-video-card p,
+  .mk-support-card p,
+  .mk-qa-body p {
+    margin: 0 0 14px;
+    color: var(--mk-muted);
+  }
+  .mk-day-note {
+    color: var(--mk-ink) !important;
+    font-weight: 600;
+  }
+  .mk-video-card {
+    padding: 24px;
+  }
+  .mk-video-card-head h3 {
+    margin-top: 10px;
+  }
+  .mk-video-embed iframe,
+  .mk-video-part video {
+    width: 100%;
+    border: 0;
+    border-radius: 20px;
+    background: #0d1117;
+    aspect-ratio: 16 / 9;
+  }
+  .mk-video-part + .mk-video-part {
+    margin-top: 18px;
+  }
+  .mk-video-part-head {
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    gap: 12px;
+    margin-bottom: 10px;
+    font-size: 13px;
+    color: var(--mk-muted);
+  }
+  .mk-video-foot {
+    display: flex;
+    flex-wrap: wrap;
+    gap: 10px 12px;
+    align-items: center;
+    margin-top: 16px;
+  }
+  .mk-link-button {
+    padding: 10px 16px;
+    background: linear-gradient(135deg, var(--mk-deep), var(--mk-indigo));
+    color: #ffffff !important;
+  }
+  .mk-qa-grid {
+    grid-template-columns: repeat(2, minmax(0, 1fr));
+  }
+  .mk-qa-card {
+    display: grid;
+    grid-template-columns: 104px 1fr;
+    gap: 0;
+    overflow: hidden;
+  }
+  .mk-qa-index {
+    padding: 24px 18px;
+    background: linear-gradient(180deg, rgba(101, 84, 242, 0.1), rgba(13, 148, 136, 0.06));
+    border-right: 1px solid var(--mk-line);
+  }
+  .mk-qa-index span {
+    display: block;
+    font-size: 26px;
+    font-weight: 800;
+    line-height: 1;
+  }
+  .mk-qa-index small {
+    display: block;
+    margin-top: 8px;
+    color: var(--mk-muted);
+    font-size: 12px;
+    text-transform: uppercase;
+    letter-spacing: 0.12em;
+  }
+  .mk-qa-body {
+    padding: 24px 24px 22px;
+  }
+  .mk-support-grid {
+    grid-template-columns: repeat(3, minmax(0, 1fr));
+  }
+  .mk-support-card a {
+    display: inline-flex;
+    margin-top: 8px;
+    color: var(--mk-indigo);
+    font-weight: 700;
+  }
+  .mk-source {
+    padding: 28px;
+  }
+  .mk-source ul {
+    margin: 14px 0 0;
+    padding-left: 18px;
+  }
+  .mk-source li + li {
+    margin-top: 8px;
+  }
+  .mk-footer {
+    padding: 0 0 72px;
+  }
+  .mk-footer-box {
+    border-radius: 28px;
+    padding: 28px;
+    background: linear-gradient(140deg, #22153f, #5b3fb4);
+    color: #ffffff;
+  }
+  .mk-footer-box h2 {
+    margin: 0 0 10px;
+    font-family: "Zen Kaku Gothic New", "Noto Sans JP", sans-serif;
+    font-weight: 900;
+    font-size: 30px;
+    line-height: 1.15;
+  }
+  .mk-footer-box p {
+    margin: 0 0 18px;
+    color: rgba(255, 255, 255, 0.84);
+  }
+  .mk-footer-box .mk-action-row {
+    margin-top: 0;
+  }
+  @media (max-width: 900px) {
+    .mk-metrics,
+    .mk-summary-grid,
+    .mk-day-grid,
+    .mk-upcoming-grid,
+    .mk-qa-grid,
+    .mk-support-grid,
+    .mk-check-grid {
+      grid-template-columns: 1fr;
+    }
+    .mk-qa-card {
+      grid-template-columns: 1fr;
+    }
+    .mk-qa-index {
+      border-right: 0;
+      border-bottom: 1px solid var(--mk-line);
+    }
+    .mk-video-card-head,
+    .mk-day-card-top {
+      flex-direction: column;
+    }
+  }
+</style>
+<div class="mk-archive">
+  <header class="mk-hero">
+    <div class="mk-shell">
+      <div class="mk-hero-copy">
+        <p class="mk-kicker">AIマーケティング構築講座 / Day2アーカイブ</p>
+        <h1>【Day2】<span class="mk-title-sub mk-title-main">オリジナルAIシステム完全構築Camp</span><span class="mk-title-sub mk-title-sub-small">AIを「単発チャット」から「自分専用の業務環境」へ変える</span></h1>
+        <p>Day2は、AIをただ使うのではなく、自分のPC・フォルダ・ルール・API・Skillに接続して、毎日の業務を継続的に進めるための環境構築回です。視聴後は、現状のAI環境、改善点、明日からのアクションプランを提出してください。</p>
+        <div class="mk-action-row"><a class="mk-slide-button" href="https://docs.google.com/presentation/d/14C3HAPZXjo7p3iOJrQfNARTNZAUCwpbVcGFQXT0ow90/edit?usp=sharing" target="_blank" rel="noopener">Day2スライドを見る</a><a class="mk-submit-button" href="https://00m.in/mUqkb" target="_blank" rel="noopener">ワークを提出する</a><a class="mk-secondary-button" href="https://00m.in/xtQbX" target="_blank" rel="noopener">Threadsで提出する</a></div>
+        <div class="mk-pill-row">
+          <span class="mk-pill">AI環境構築</span>
+          <span class="mk-pill">ローカルフォルダ設計</span>
+          <span class="mk-pill">API / .env</span>
+          <span class="mk-pill">CLAUDE.md / Skill運用</span>
+        </div>
+        <div class="mk-metrics">
+          <article class="mk-metric"><span>視聴</span><strong>1本</strong></article>
+          <article class="mk-metric"><span>提出物</span><strong>AI環境の現状整理</strong></article>
+          <article class="mk-metric"><span>次の準備</span><strong>Day3 Directoryへ</strong></article>
+        </div>
+      </div>
+    </div>
+  </header>
+
+  <main>
+    <section class="mk-section">
+      <div class="mk-shell">
+        <div class="mk-section-head">
+          <p class="mk-kicker">Start Here</p>
+          <h2>このアーカイブでやること</h2>
+          <p>Day2は、受講生が自分のAI環境を点検し、明日から実際に使うフォルダ・ルール・接続先を決める回です。動画を見るだけで終わらせず、最後に必ずワークまで進めてください。</p>
+        </div>
+        <div class="mk-summary-grid">
+          <article class="mk-panel">
+            <h3>視聴後にできていればOK</h3>
+            <ul>
+              <li>自分が使うAI環境を言語化できている</li>
+              <li>AIに読ませるローカルフォルダの候補が決まっている</li>
+              <li>Drive / iCloud / ローカルの使い分けを説明できる</li>
+              <li>CLAUDE.mdやdirectory系ファイルに何を書くかの方向性がある</li>
+              <li>APIキーや.envを直接プロンプトへ貼らない理由を理解している</li>
+            </ul>
+          </article>
+          <article class="mk-panel mk-note">
+            <h3>提出ワーク</h3>
+            <p>Day2の提出は、環境構築の完成報告ではありません。今の状態を見える化し、次に整える場所を決めることが目的です。</p>
+            <ul>
+              <li>1. 現状のAI環境</li>
+              <li>2. AI環境の改善点</li>
+              <li>3. 明日からのアクションプラン</li>
+            </ul>
+            <div class="mk-action-row mk-section-actions"><a class="mk-submit-button" href="https://00m.in/mUqkb" target="_blank" rel="noopener">ワークを提出する</a><a class="mk-secondary-button" href="https://00m.in/xtQbX" target="_blank" rel="noopener">Threadsで提出する</a></div>
+          </article>
+        </div>
+      </div>
+    </section>
+
+    <section class="mk-section mk-section-tight">
+      <div class="mk-shell">
+        <div class="mk-section-head">
+          <p class="mk-kicker">Viewing Guide</p>
+          <h2>講義の見どころ</h2>
+          <p>講義では、AIをチャット画面の外へ出し、PC内のフォルダ・ファイル・ルール・外部サービスとつなぐ考え方が中心です。Day1で棚卸しした業務を、Day2ではAIが実行できる環境へ寄せていきます。</p>
+        </div>
+        <div class="mk-day-grid">
+          <article class="mk-day-card"><div class="mk-day-card-top"><span class="mk-day-chip">Day 2</span><span class="mk-status-chip">アーカイブ掲載済み</span></div><h3>オリジナルAIシステム完全構築Camp</h3><p>AIを単発チャットで使う状態から、自分のPC・フォルダ・ルール・API・Skillに接続して、業務を継続的に進めるオリジナルAI環境へ移行する回です。</p><p class="mk-day-note">Day2録画を1本で確認</p><ul><li>Claude Code / Codex / デスクトップアプリ / CLIの役割を整理する</li><li>AIが直接触るローカルフォルダを作り、DriveやiCloud同期との使い分けを決める</li><li>CLAUDE.mdやdirectory系ファイルに、AIへ守らせる判断軸を入れる</li><li>APIキー・.env・外部サービス接続の最低限の考え方を理解する</li><li>Skillを作って終わりにせず、日次・案件・業務単位で呼び出せる状態にする</li></ul></article>
+        </div>
+      </div>
+    </section>
+
+    <section class="mk-section">
+      <div class="mk-shell">
+        <div class="mk-section-head">
+          <p class="mk-kicker">Archive Video</p>
+          <h2>Day2動画アーカイブ</h2>
+          <p>Day2録画を1本で掲載しています。まず通しで見て、Q&Aや自分の詰まりに近い箇所だけ後から見返してください。</p>
+        </div>
+        <div class="mk-video-grid">
+          <article class="mk-video-card"><div class="mk-video-card-head"><div><span class="mk-day-chip">Day 2</span><h3>オリジナルAIシステム完全構築Camp</h3></div><span class="mk-status-chip">Day2録画を1本で確認</span></div><p>AIを単発チャットで使う状態から、自分のPC・フォルダ・ルール・API・Skillに接続して、業務を継続的に進めるオリジナルAI環境へ移行する回です。</p><div class="mk-video-part"><div class="mk-video-part-head"><strong>Day2 アーカイブ本編</strong><span>オリジナルAIシステム完全構築Camp</span></div><div class="mk-video-embed"><iframe src="https://drive.google.com/file/d/1Ctj_hUcrj7Qmw0Dhmxc7CmggKxny7LxJ/preview" allow="autoplay; fullscreen" allowfullscreen title="Day2 アーカイブ本編"></iframe></div><div class="mk-video-foot"><span class="mk-status-pill mk-status-ok">Driveで再生できます</span><a class="mk-link-button" href="https://drive.google.com/file/d/1Ctj_hUcrj7Qmw0Dhmxc7CmggKxny7LxJ/view?usp=drivesdk" target="_blank" rel="noopener">Driveで開く</a></div></div></article>
+        </div>
+      </div>
+    </section>
+
+    <section class="mk-section mk-section-tight">
+      <div class="mk-shell">
+        <div class="mk-section-head">
+          <p class="mk-kicker">Memo Points</p>
+          <h2>視聴中にメモするポイント</h2>
+          <p>Day2は情報量が多いため、ツール名を覚えるよりも、自分の環境に置き換えてメモすることが重要です。</p>
+        </div>
+        <div class="mk-check-grid">
+          <article class="mk-panel">
+            <h3>1. AIが触る場所</h3>
+            <ul>
+              <li>AI用フォルダはどこに置くか</li>
+              <li>DriveやiCloudと同期するか</li>
+              <li>案件別にフォルダとセッションを分けるか</li>
+            </ul>
+          </article>
+          <article class="mk-panel">
+            <h3>2. AIに守らせるルール</h3>
+            <ul>
+              <li>CLAUDE.mdに絶対ルールを書く</li>
+              <li>directory系ファイルで保存先判断を分ける</li>
+              <li>更新すべきstateやmemoryを決める</li>
+            </ul>
+          </article>
+          <article class="mk-panel">
+            <h3>3. 外部接続とSkill</h3>
+            <ul>
+              <li>APIキーをどう管理するか</li>
+              <li>使うSkillと使わないSkillを分ける</li>
+              <li>毎日使う作業を日次Skillへ寄せる</li>
+            </ul>
+          </article>
+        </div>
+      </div>
+    </section>
+
+    <section class="mk-section">
+      <div class="mk-shell">
+        <div class="mk-section-head">
+          <p class="mk-kicker">Next Sessions</p>
+          <h2>Day3以降の予告</h2>
+          <p>Day2でAI環境の土台を作ったら、Day3以降でDirectory設計、Skill化、事業化、セキュリティへ進みます。次に何を回収するかだけ先に確認してください。</p>
+        </div>
+        <div class="mk-upcoming-grid">
+          <article class="mk-day-card"><div class="mk-day-card-top"><span class="mk-day-chip">Day 3</span><span class="mk-status-chip">次回予告</span></div><h3>THE DIRECTORY</h3><p>Day2で作ったAI環境を、迷わず使えるフォルダ構造へ落とし込む回です。どこを正本にするか、何をAIに読ませるか、更新ルールをどう残すかを整理します。</p><p class="mk-day-note">正本管理とDirectory設計</p><ul><li>AIが迷わないディレクトリ構造を作る</li><li>ローカル・Drive・ナレッジ・Skillの役割を分ける</li><li>ファイル更新時にAIへ読ませる正本を決める</li></ul></article><article class="mk-day-card"><div class="mk-day-card-top"><span class="mk-day-chip">Day 4</span><span class="mk-status-chip">予告</span></div><h3>Skillsのすゝめ</h3><p>うまくいったAI作業を、毎回使えるSkillとして保存する回です。発信、リサーチ、台本、資料作成、クライアントワークなどを再現可能な型へ寄せます。</p><p class="mk-day-note">再現できる手順化</p><ul><li>何度も使う業務をSkill化する</li><li>死にSkill・幽霊Skillを増やさない運用を持つ</li><li>複数Skillを組み合わせるワークフローを考える</li></ul></article><article class="mk-day-card"><div class="mk-day-card-top"><span class="mk-day-chip">Day 5</span><span class="mk-status-chip">予告</span></div><h3>AI系事業の勝ち方</h3><p>AI環境とSkillを、事業・商品・受託・社内導入に接続する回です。既存スキルにAIを載せて、どのポジションで価値提供するかを整理します。</p><p class="mk-day-note">AIを収益に変える考え方</p><ul><li>既存スキルにAIを掛け合わせる</li><li>AI環境構築ごと支援する価値を理解する</li><li>クライアントや受講生へ渡せる形に整える</li></ul></article><article class="mk-day-card"><div class="mk-day-card-top"><span class="mk-day-chip">Day 6</span><span class="mk-status-chip">予告</span></div><h3>AI時代のセキュリティ対策完全攻略Camp</h3><p>APIキー、権限、公開範囲、ブラウザ操作、同期フォルダなど、AI活用を継続可能にするためのセキュリティ実務を扱います。</p><p class="mk-day-note">安全にAIを使う前提作り</p><ul><li>APIキーや.envを安全に扱う</li><li>公開レポジトリや画面共有で事故を起こさない</li><li>案件別に読ませる情報を分離する</li></ul></article><article class="mk-day-card"><div class="mk-day-card-top"><span class="mk-day-chip">Final</span><span class="mk-status-chip">実践予告</span></div><h3>最終日 東京作業会・実践共有</h3><p>講義で作ったAI環境・Directory・Skillを実際の事業へ接続する実践回です。その場で進め、詰まりを解消し、成果共有まで行います。</p><p class="mk-day-note">作業会・成果共有</p><ul><li>自分のAI環境を実業務へ接続する</li><li>成果報告と壁打ちで次の打ち手を決める</li><li>講師・運営・受講生との接点を継続の推進力に変える</li></ul></article>
+        </div>
+      </div>
+    </section>
+
+    <section class="mk-section">
+      <div class="mk-shell">
+        <div class="mk-section-head">
+          <p class="mk-kicker">Q&amp;A</p>
+          <h2>Day2でよく出た質問</h2>
+          <p>Zoomチャットと講義内Q&Aから、受講生が詰まりやすい内容を整理しています。</p>
+        </div>
+        <div class="mk-qa-grid">
+          <article class="mk-qa-card"><div class="mk-qa-index"><span>Q1</span><small>ゴール</small></div><div class="mk-qa-body"><h3>Day2のゴールは何ですか？</h3><p>AIツールを増やすことではなく、自分のPC内にAIが参照できるフォルダ・ルール・ナレッジ・Skillを用意し、業務を毎回ゼロから説明しなくても進められる状態にすることです。</p></div></article><article class="mk-qa-card"><div class="mk-qa-index"><span>Q2</span><small>環境</small></div><div class="mk-qa-body"><h3>Claude CodeとCodexはどちらを使えばいいですか？</h3><p>どちらも使えます。講義内では、デスクトップアプリはUIが分かりやすく、CLIやターミナルは作業を直接進めやすい、という整理で説明されています。まずは自分が触れる環境で前に進め、詰まったら質問してください。</p></div></article><article class="mk-qa-card"><div class="mk-qa-index"><span>Q3</span><small>保存先</small></div><div class="mk-qa-body"><h3>AI用フォルダはGoogle Driveだけに置いてもいいですか？</h3><p>おすすめは、AIが直接触る実体をローカルに置く形です。ローカルに実体があり、そのうえでDriveやiCloudと同期している状態なら運用しやすいです。Driveだけにあると確認や改修が遅くなる場合があります。</p></div></article><article class="mk-qa-card"><div class="mk-qa-index"><span>Q4</span><small>案件管理</small></div><div class="mk-qa-body"><h3>クライアント案件の情報漏洩を避けるにはどう分ければいいですか？</h3><p>A社、B社のようにフォルダを分け、セッションも案件ごとに分けて使うのが基本です。AIは選択したフォルダ配下を読める前提で、案件ごとに読み込ませる情報を分離してください。</p></div></article><article class="mk-qa-card"><div class="mk-qa-index"><span>Q5</span><small>ルール</small></div><div class="mk-qa-body"><h3>CLAUDE.mdには何を書けばいいですか？</h3><p>全部を書き込む場所ではなく、AIに毎回守らせたい絶対ルールを書く場所です。出力先判断の詳細はdirectory系ファイルへ分け、CLAUDE.mdには『出力時はそのファイルを参照する』のようにルーティングを書くと運用しやすいです。</p></div></article><article class="mk-qa-card"><div class="mk-qa-index"><span>Q6</span><small>API</small></div><div class="mk-qa-body"><h3>.envやAPIキーはどう扱えばいいですか？</h3><p>プロンプトへAPIキーを直接書かず、.envなどに置いて変数名で参照させるのが基本です。画面共有や公開リポジトリへ混入しないよう注意し、必要に応じてInfisicalのようなシークレット管理サービスも検討してください。</p></div></article><article class="mk-qa-card"><div class="mk-qa-index"><span>Q7</span><small>Skill</small></div><div class="mk-qa-body"><h3>使っていないSkillが増えたらどうすればいいですか？</h3><p>死にSkill・幽霊Skillを放置すると、何を使えばいいか分からなくなります。日次、案件、発信、リサーチなど用途ごとに棚卸しし、使うSkillだけを呼び出しやすい場所に残してください。</p></div></article><article class="mk-qa-card"><div class="mk-qa-index"><span>Q8</span><small>提出</small></div><div class="mk-qa-body"><h3>Day2の提出ワークは何を書けばいいですか？</h3><p>現状のAI環境、AI環境の改善点、明日からのアクションプランの3つです。完璧な設計図ではなく、今どこまでできていて、次にどこを整えるかが分かればOKです。</p></div></article>
+        </div>
+      </div>
+    </section>
+
+    <section class="mk-section mk-section-tight">
+      <div class="mk-shell">
+        <div class="mk-section-head">
+          <p class="mk-kicker">Support</p>
+          <h2>ワーク提出・補助教材・質問導線</h2>
+          <p>アーカイブ視聴後に迷わないよう、Day2で使う導線だけをまとめています。</p>
+        </div>
+        <div class="mk-support-grid">
+          <article class="mk-support-card"><h3>Day2ワークをXで提出</h3><p>Day2の提出テンプレートつき投稿リンクです。視聴後はここから提出してください。</p><a href="https://00m.in/mUqkb" target="_blank" rel="noopener">開く</a></article><article class="mk-support-card"><h3>Day2ワークをThreadsで提出</h3><p>Threadsで提出する場合はこちらを使ってください。</p><a href="https://00m.in/xtQbX" target="_blank" rel="noopener">開く</a></article><article class="mk-support-card"><h3>本日企画ポスト</h3><p>Day2企画ポストです。アウトプット時の参照先として使えます。</p><a href="https://x.com/starriver0513/status/2058729768871432440/photo/1" target="_blank" rel="noopener">開く</a></article><article class="mk-support-card"><h3>THE WORKSPACE v0.1</h3><p>Day2の環境構築理解を深める補助教材です。</p><a href="https://sub.osaru01.jp/members/bTBAR5X4RkG1/course/DEbcTYh0Fnd4/lesson/VYc05HHRMVyL" target="_blank" rel="noopener">開く</a></article><article class="mk-support-card"><h3>THE・DIRECTORY v1.1</h3><p>Day3以降のDirectory設計へ進む前に確認しておきたい教材です。</p><a href="https://sub.osaru01.jp/members/bTBAR5X4RkG1/course/DEbcTYh0Fnd4/lesson/K6boJHB2YqKb" target="_blank" rel="noopener">開く</a></article><article class="mk-support-card"><h3>対談動画Skill</h3><p>講義中に共有されたSkill関連教材です。</p><a href="https://sub.osaru01.jp/members/bTBAR5X4RkG1/course/DEbcTYh0Fnd4/lesson/540IxMnCnoUG" target="_blank" rel="noopener">開く</a></article><article class="mk-support-card"><h3>Infisical</h3><p>.envやAPIキー管理の参考として講義中に触れられたサービスです。</p><a href="https://infisical.com/" target="_blank" rel="noopener">開く</a></article><article class="mk-support-card"><h3>AIマーケ講座イベントカレンダー</h3><p>LIVEセミナー、オフ会、作業会の直近予定をまとめたカレンダーです。</p><a href="https://calendar.google.com/calendar/u/0?cid=Njc3YjBjNzJiMmEyY2RiYTg0MWFkY2Y4OTc5YWE5ZjIyMjBiNGVlNTRjZDAwNjQ5YWRlNGE5MTJlY2IzMjZiY0Bncm91cC5jYWxlbmRhci5nb29nbGUuY29t" target="_blank" rel="noopener">開く</a></article><article class="mk-support-card"><h3>質問チャット</h3><p>AIや実装の質問はここへ集約します。詰まったら、環境とエラー内容を添えて質問してください。</p><a href="https://www.chatwork.com/g/n80fpoujac70bv" target="_blank" rel="noopener">開く</a></article><article class="mk-support-card"><h3>成果報告チャット</h3><p>小さな進捗でもここで共有し、次の打ち手へ変えていきます。</p><a href="https://www.chatwork.com/g/4mdakg236ufwwl" target="_blank" rel="noopener">開く</a></article><article class="mk-support-card"><h3>AI情報共有チャット</h3><p>新しいAI情報、運用改善、気づきの共有に使う部屋です。</p><a href="https://www.chatwork.com/g/pchh4ihqjc1rtl" target="_blank" rel="noopener">開く</a></article>
+        </div>
+      </div>
+    </section>
+
+    <section class="mk-section mk-section-tight">
+      <div class="mk-shell">
+        <article class="mk-panel mk-source">
+          <h3>反映した一次情報</h3>
+          <ul><li>Day2のZoom録画・講義内Q&amp;A・Zoomチャットをもとに整理しています。</li><li>講義中に共有された提出リンク、補助教材、質問導線をまとめています。</li><li>Day1アーカイブと同じ座組で、Day2の内容だけに差し替えています。</li></ul>
+        </article>
+      </div>
+    </section>
+  </main>
+
+  <footer class="mk-footer">
+    <div class="mk-shell">
+      <div class="mk-footer-box">
+        <h2>Day2のワークを提出して、明日のDirectory設計へ進んでください</h2>
+        <p>完璧な環境を作ってから提出する必要はありません。現状、改善点、明日やることが見えていればDay2の目的は達成です。</p>
+        <div class="mk-action-row"><a class="mk-slide-button" href="https://docs.google.com/presentation/d/14C3HAPZXjo7p3iOJrQfNARTNZAUCwpbVcGFQXT0ow90/edit?usp=sharing" target="_blank" rel="noopener">Day2スライドを見る</a><a class="mk-submit-button" href="https://00m.in/mUqkb" target="_blank" rel="noopener">ワークを提出する</a><a class="mk-secondary-button" href="https://00m.in/xtQbX" target="_blank" rel="noopener">Threadsで提出する</a></div>
+      </div>
+    </div>
+  </footer>
+</div>

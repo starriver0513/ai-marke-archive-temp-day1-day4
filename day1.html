@@ -1,0 +1,609 @@
+<style>
+  @import url('https://fonts.googleapis.com/css2?family=Noto+Sans+JP:wght@400;500;700;900&family=Zen+Kaku+Gothic+New:wght@500;700;900&display=swap');
+  :root {
+    --mk-ink: #181326;
+    --mk-muted: #6f6a7d;
+    --mk-paper: #ffffff;
+    --mk-soft: #f8f5ff;
+    --mk-line: rgba(86, 72, 126, 0.16);
+    --mk-deep: #22153f;
+    --mk-indigo: #6554f2;
+    --mk-violet: #9b5cf6;
+    --mk-teal: #0d9488;
+    --mk-rose: #e64f86;
+    --mk-gold: #f4bc4b;
+    --mk-shadow: 0 22px 70px rgba(49, 33, 92, 0.14);
+  }
+  .mk-archive {
+    margin: 0;
+    color: var(--mk-ink);
+    background: linear-gradient(180deg, #f8f5ff 0%, #ffffff 34%, #f6fbff 72%, #fff8fb 100%);
+    font-family: "Noto Sans JP", "Hiragino Sans", "Yu Gothic", "YuGothic", sans-serif;
+    line-height: 1.75;
+  }
+  .mk-archive * { box-sizing: border-box; }
+  .mk-archive a { color: inherit; text-decoration: none; }
+  .mk-shell {
+    width: min(1120px, calc(100% - 32px));
+    margin: 0 auto;
+  }
+  .mk-hero {
+    position: relative;
+    overflow: hidden;
+    color: #ffffff;
+    background: linear-gradient(135deg, #22153f 0%, #5b3fb4 48%, #0f7f7a 100%);
+    padding: 72px 0 56px;
+  }
+  .mk-hero::before,
+  .mk-hero::after {
+    content: "";
+    position: absolute;
+    border-radius: 999px;
+    filter: blur(8px);
+    opacity: 0.3;
+  }
+  .mk-hero::before {
+    width: 420px;
+    height: 420px;
+    right: -140px;
+    top: -120px;
+    background: radial-gradient(circle, rgba(244, 188, 75, 0.82), rgba(244, 188, 75, 0));
+  }
+  .mk-hero::after {
+    width: 300px;
+    height: 300px;
+    left: -100px;
+    bottom: -120px;
+    background: radial-gradient(circle, rgba(83, 243, 225, 0.78), rgba(83, 243, 225, 0));
+  }
+  .mk-kicker {
+    margin: 0 0 12px;
+    letter-spacing: 0.14em;
+    font-size: 12px;
+    text-transform: uppercase;
+    color: rgba(255, 255, 255, 0.78);
+  }
+  .mk-hero h1 {
+    margin: 0;
+    font-family: "Zen Kaku Gothic New", "Noto Sans JP", sans-serif;
+    font-weight: 900;
+    font-size: clamp(34px, 5.6vw, 58px);
+    line-height: 1.08;
+    letter-spacing: 0;
+  }
+  .mk-title-sub {
+    display: block;
+    margin-top: 12px;
+    font-size: clamp(20px, 3vw, 34px);
+    line-height: 1.25;
+    color: rgba(255, 255, 255, 0.86);
+  }
+  .mk-hero-copy {
+    position: relative;
+    z-index: 1;
+    max-width: 920px;
+  }
+  .mk-hero-copy p {
+    margin: 18px 0 0;
+    font-size: 17px;
+    color: rgba(255, 255, 255, 0.9);
+  }
+  .mk-pill-row {
+    display: flex;
+    flex-wrap: wrap;
+    gap: 10px;
+    margin-top: 22px;
+  }
+  .mk-pill {
+    border: 1px solid rgba(255, 255, 255, 0.24);
+    border-radius: 999px;
+    padding: 10px 14px;
+    background: rgba(255, 255, 255, 0.11);
+    font-size: 13px;
+  }
+  .mk-metrics {
+    display: grid;
+    grid-template-columns: repeat(3, minmax(0, 1fr));
+    gap: 14px;
+    margin-top: 32px;
+  }
+  .mk-metric {
+    border: 1px solid rgba(255, 255, 255, 0.18);
+    border-radius: 14px;
+    padding: 18px 20px;
+    background: rgba(255, 255, 255, 0.1);
+    backdrop-filter: blur(10px);
+  }
+  .mk-metric span {
+    display: block;
+    font-size: 12px;
+    color: rgba(255, 255, 255, 0.72);
+    text-transform: uppercase;
+    letter-spacing: 0.12em;
+  }
+  .mk-metric strong {
+    display: block;
+    margin-top: 8px;
+    font-size: 24px;
+    line-height: 1.2;
+  }
+  .mk-section {
+    padding: 72px 0;
+  }
+  .mk-section-tight {
+    padding-top: 0;
+  }
+  .mk-section-head {
+    max-width: 760px;
+    margin-bottom: 28px;
+  }
+  .mk-section .mk-kicker {
+    color: var(--mk-violet);
+  }
+  .mk-section-head h2 {
+    margin: 0;
+    font-family: "Zen Kaku Gothic New", "Noto Sans JP", sans-serif;
+    font-weight: 900;
+    font-size: clamp(28px, 4vw, 40px);
+    line-height: 1.12;
+    letter-spacing: 0;
+  }
+  .mk-section-head p:last-child {
+    margin: 14px 0 0;
+    color: var(--mk-muted);
+  }
+  .mk-summary-grid,
+  .mk-day-grid,
+  .mk-video-grid,
+  .mk-qa-grid,
+  .mk-support-grid {
+    display: grid;
+    gap: 18px;
+  }
+  .mk-upcoming-grid {
+    display: grid;
+    gap: 16px;
+    grid-template-columns: repeat(3, minmax(0, 1fr));
+  }
+  .mk-summary-grid {
+    grid-template-columns: 1.15fr 0.85fr;
+    align-items: start;
+  }
+  .mk-panel,
+  .mk-day-card,
+  .mk-video-card,
+  .mk-qa-card,
+  .mk-support-card {
+    background: var(--mk-paper);
+    border: 1px solid var(--mk-line);
+    border-radius: 24px;
+    box-shadow: var(--mk-shadow);
+  }
+  .mk-panel {
+    padding: 28px;
+  }
+  .mk-panel p {
+    margin: 0 0 16px;
+  }
+  .mk-panel ul,
+  .mk-day-card ul {
+    margin: 0;
+    padding-left: 18px;
+  }
+  .mk-panel li,
+  .mk-day-card li {
+    margin-top: 8px;
+  }
+  .mk-note {
+    background: linear-gradient(135deg, rgba(101, 84, 242, 0.08), rgba(13, 148, 136, 0.08));
+  }
+  .mk-note h3,
+  .mk-day-card h3,
+  .mk-video-card h3,
+  .mk-support-card h3,
+  .mk-qa-body h3 {
+    margin: 0 0 12px;
+    font-family: "Zen Kaku Gothic New", "Noto Sans JP", sans-serif;
+    font-weight: 800;
+    font-size: 22px;
+    line-height: 1.25;
+    letter-spacing: 0;
+  }
+  .mk-day-grid {
+    grid-template-columns: 1fr;
+  }
+  .mk-day-card {
+    padding: 22px;
+  }
+  .mk-day-card-top,
+  .mk-video-card-head {
+    display: flex;
+    align-items: flex-start;
+    justify-content: space-between;
+    gap: 12px;
+  }
+  .mk-day-chip,
+  .mk-status-chip,
+  .mk-status-pill {
+    display: inline-flex;
+    align-items: center;
+    border-radius: 999px;
+    padding: 6px 10px;
+    font-size: 12px;
+    font-weight: 700;
+  }
+  .mk-day-chip {
+    background: rgba(101, 84, 242, 0.1);
+    color: var(--mk-indigo);
+  }
+  .mk-status-chip {
+    background: rgba(244, 188, 75, 0.18);
+    color: #7a4b08;
+    text-align: right;
+  }
+  .mk-status-pill {
+    background: rgba(101, 84, 242, 0.11);
+    color: var(--mk-indigo);
+  }
+  .mk-status-ok {
+    background: rgba(15, 118, 110, 0.12);
+    color: var(--mk-teal);
+  }
+  .mk-status-wait {
+    background: rgba(225, 29, 72, 0.1);
+    color: var(--mk-rose);
+  }
+  .mk-day-card p,
+  .mk-video-card p,
+  .mk-support-card p,
+  .mk-qa-body p {
+    margin: 0 0 14px;
+    color: var(--mk-muted);
+  }
+  .mk-day-note {
+    color: var(--mk-ink) !important;
+    font-weight: 600;
+  }
+  .mk-video-grid {
+    grid-template-columns: 1fr;
+  }
+  .mk-video-card {
+    padding: 24px;
+  }
+  .mk-video-card-head h3 {
+    margin-top: 10px;
+  }
+  .mk-video-embed iframe,
+  .mk-video-part video {
+    width: 100%;
+    border: 0;
+    border-radius: 20px;
+    background: #0d1117;
+    aspect-ratio: 16 / 9;
+  }
+  .mk-video-part + .mk-video-part {
+    margin-top: 18px;
+  }
+  .mk-video-part-head {
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    gap: 12px;
+    margin-bottom: 10px;
+    font-size: 13px;
+    color: var(--mk-muted);
+  }
+  .mk-video-placeholder {
+    border: 1px dashed rgba(101, 84, 242, 0.28);
+    border-radius: 20px;
+    padding: 28px;
+    background: linear-gradient(135deg, rgba(101, 84, 242, 0.05), rgba(13, 148, 136, 0.05));
+  }
+  .mk-video-placeholder span {
+    display: block;
+    color: var(--mk-indigo);
+    font-size: 12px;
+    text-transform: uppercase;
+    letter-spacing: 0.12em;
+  }
+  .mk-video-placeholder strong {
+    display: block;
+    margin-top: 8px;
+    font-size: 22px;
+    line-height: 1.25;
+  }
+  .mk-video-placeholder p {
+    margin-top: 10px;
+    margin-bottom: 0;
+  }
+  .mk-video-foot {
+    display: flex;
+    flex-wrap: wrap;
+    gap: 10px 12px;
+    align-items: center;
+    margin-top: 16px;
+  }
+  .mk-video-help {
+    display: inline-flex;
+    align-items: center;
+    color: var(--mk-muted);
+    font-size: 13px;
+  }
+  .mk-link-button {
+    display: inline-flex;
+    align-items: center;
+    justify-content: center;
+    border-radius: 999px;
+    padding: 10px 16px;
+    background: linear-gradient(135deg, var(--mk-deep), var(--mk-indigo));
+    color: #ffffff !important;
+    font-weight: 700;
+  }
+  .mk-qa-grid {
+    grid-template-columns: repeat(2, minmax(0, 1fr));
+  }
+  .mk-qa-card {
+    display: grid;
+    grid-template-columns: 104px 1fr;
+    gap: 0;
+    overflow: hidden;
+  }
+  .mk-qa-index {
+    padding: 24px 18px;
+    background: linear-gradient(180deg, rgba(101, 84, 242, 0.1), rgba(13, 148, 136, 0.06));
+    border-right: 1px solid var(--mk-line);
+  }
+  .mk-qa-index span {
+    display: block;
+    font-size: 26px;
+    font-weight: 800;
+    line-height: 1;
+  }
+  .mk-qa-index small {
+    display: block;
+    margin-top: 8px;
+    color: var(--mk-muted);
+    font-size: 12px;
+    text-transform: uppercase;
+    letter-spacing: 0.12em;
+  }
+  .mk-qa-body {
+    padding: 24px 24px 22px;
+  }
+  .mk-support-grid {
+    grid-template-columns: repeat(3, minmax(0, 1fr));
+  }
+  .mk-support-card {
+    padding: 22px;
+  }
+  .mk-support-card a {
+    display: inline-flex;
+    margin-top: 8px;
+    color: var(--mk-indigo);
+    font-weight: 700;
+  }
+  .mk-source {
+    padding: 28px;
+  }
+  .mk-source ul {
+    margin: 14px 0 0;
+    padding-left: 18px;
+  }
+  .mk-source li + li {
+    margin-top: 8px;
+  }
+  .mk-footer {
+    padding: 0 0 72px;
+  }
+  .mk-footer-box {
+    border-radius: 28px;
+    padding: 28px;
+    background: linear-gradient(140deg, #22153f, #5b3fb4);
+    color: #ffffff;
+  }
+  .mk-footer-box h2 {
+    margin: 0 0 10px;
+    font-family: "Zen Kaku Gothic New", "Noto Sans JP", sans-serif;
+    font-weight: 900;
+    font-size: 30px;
+    line-height: 1.15;
+  }
+  .mk-footer-box p {
+    margin: 0 0 18px;
+    color: rgba(255, 255, 255, 0.84);
+  }
+  .mk-footer-box .mk-pill-row {
+    margin-top: 0;
+  }
+  .mk-source-note {
+    margin-top: 18px;
+    font-size: 13px;
+    color: rgba(255, 255, 255, 0.72);
+  }
+  @media (max-width: 900px) {
+    .mk-metrics,
+    .mk-summary-grid,
+    .mk-day-grid,
+    .mk-upcoming-grid,
+    .mk-qa-grid,
+    .mk-support-grid {
+      grid-template-columns: 1fr;
+    }
+    .mk-qa-card {
+      grid-template-columns: 1fr;
+    }
+    .mk-qa-index {
+      border-right: 0;
+      border-bottom: 1px solid var(--mk-line);
+    }
+    .mk-video-card-head,
+    .mk-day-card-top {
+      flex-direction: column;
+    }
+  }
+</style>
+<div class="mk-archive">
+  <header class="mk-hero">
+    <div class="mk-shell">
+      <div class="mk-hero-copy">
+        <p class="mk-kicker">AIマーケティング構築講座 / Day1アーカイブ</p>
+        <h1>【Day1】たった1回で全体像を掴む AI駆動型マーケティング大全<span class="mk-title-sub">〜9割の仕事をAI化するための完全ロードマップ〜</span></h1>
+        <p>このページでは、Day1の録画を6パートで見返せます。動画を見た後は、今日の作業を10個書き出し、AI化できる仕事・半分任せる仕事・人間が判断する仕事に分けて、成果報告まで進めてください。</p>
+        <div class="mk-pill-row">
+          <span class="mk-pill">まず動画を見る</span>
+          <span class="mk-pill">作業を10個棚卸し</span>
+          <span class="mk-pill">AI化可 / 半々 / 人間で仕分け</span>
+          <span class="mk-pill">成果報告へ投稿</span>
+        </div>
+        <div class="mk-metrics">
+          <article class="mk-metric"><span>視聴</span><strong>6パート</strong></article>
+          <article class="mk-metric"><span>提出物</span><strong>作業10個の棚卸し</strong></article>
+          <article class="mk-metric"><span>次の準備</span><strong>Day2以降の実装へ</strong></article>
+        </div>
+      </div>
+    </div>
+  </header>
+
+  <main>
+    <section class="mk-section">
+      <div class="mk-shell">
+        <div class="mk-section-head">
+          <p class="mk-kicker">Start Here</p>
+          <h2>このアーカイブでやること</h2>
+          <p>Day1は、AIツールを眺める回ではありません。自分の仕事を分解し、どこをAIに任せるか、どこに人間の判断を残すかを決めるための入口です。</p>
+        </div>
+        <div class="mk-summary-grid">
+          <article class="mk-panel">
+            <h3>視聴後にできていればOK</h3>
+            <ul>
+              <li>今日の作業を10個書き出せている</li>
+              <li>それぞれの作業に、かかった時間を書けている</li>
+              <li>AI化可 / 半々 / 人間のみの3つに仕分けできている</li>
+              <li>成果報告チャットへ投稿する内容がまとまっている</li>
+            </ul>
+          </article>
+          <article class="mk-panel mk-note">
+            <h3>おすすめの進め方</h3>
+            <p>最初から完璧に理解しようとせず、動画を見ながら自分の仕事に置き換えてメモしてください。迷った作業は一旦「半々」に置き、Day2以降でAIに任せる範囲を広げていきます。</p>
+            <ul>
+              <li>Step 1: Part 1〜6を順番に見る</li>
+              <li>Step 2: 自分の作業を10個書き出す</li>
+              <li>Step 3: AI化の仕分けをして成果報告へ投稿する</li>
+            </ul>
+          </article>
+        </div>
+      </div>
+    </section>
+
+    <section class="mk-section mk-section-tight">
+      <div class="mk-shell">
+        <div class="mk-section-head">
+          <p class="mk-kicker">Viewing Guide</p>
+          <h2>講義の見どころ</h2>
+          <p>この回で大事なのは、AIに何を任せるかを決める前に、自分が何に時間を使っているかを把握することです。後続のDirectory構築やSkill化は、この棚卸しがあるほど実装しやすくなります。</p>
+        </div>
+        <div class="mk-day-grid">
+          <article class="mk-day-card"><div class="mk-day-card-top"><span class="mk-day-chip">Day 1</span><span class="mk-status-chip">アーカイブ掲載済み</span></div><h3>たった1回で全体像を掴む AI駆動型マーケティング大全</h3><p>9割の仕事をAI化するために、まず自分の作業・時間・判断を見える化する回です。AIに任せる仕事、人間が判断する仕事、半自動化で進める仕事を切り分け、明日からの実践に使えるAI化ロードマップの土台を作ります。</p><p class="mk-day-note">Day1アーカイブ動画を6分割で掲載済み</p><ul><li>1日の作業を細かく棚卸しし、AI化可 / 半々 / 人間のみで仕分ける</li><li>マーケティング業務を、リサーチ・設計・制作・配信・改善に分解してAI化の順番を決める</li><li>AIの性能よりも、渡す材料・判断基準・時間配分が成果を左右する</li><li>講義後は、今日の作業10個と所要時間を書き出してAI化ロードマップに変える</li></ul></article>
+        </div>
+      </div>
+    </section>
+
+    <section class="mk-section">
+      <div class="mk-shell">
+        <div class="mk-section-head">
+          <p class="mk-kicker">Archive Video</p>
+          <h2>Day1動画アーカイブ</h2>
+          <p>Day1録画を6パートに分けて掲載しています。Google Driveのpreview形式に変更しています。UTAGE編集画面内で再生できない場合も、各パートの「Driveで開く」ボタンから別タブで視聴できます。</p>
+        </div>
+        <div class="mk-video-grid">
+          <article class="mk-video-card"><div class="mk-video-card-head"><div><span class="mk-day-chip">Day 1</span><h3>たった1回で全体像を掴む AI駆動型マーケティング大全</h3></div><span class="mk-status-chip">Day1アーカイブ動画を6分割で掲載済み</span></div><p>9割の仕事をAI化するために、まず自分の作業・時間・判断を見える化する回です。AIに任せる仕事、人間が判断する仕事、半自動化で進める仕事を切り分け、明日からの実践に使えるAI化ロードマップの土台を作ります。</p><div class="mk-video-part"><div class="mk-video-part-head"><strong>Part 1</strong><span>Google Drive preview</span></div><div class="mk-video-embed"><iframe src="https://drive.google.com/file/d/1isxtLvuvGQ9L76LBh2YfFQzLuFrM0JRP/preview" allow="autoplay; fullscreen" allowfullscreen title="Part 1"></iframe></div><div class="mk-video-foot"><span class="mk-status-pill mk-status-ok">Driveプレビュー</span><a class="mk-link-button" href="https://drive.google.com/file/d/1isxtLvuvGQ9L76LBh2YfFQzLuFrM0JRP/view?usp=drivesdk" target="_blank" rel="noopener">Driveで開く</a><span class="mk-video-help">UTAGE編集画面内で再生できない場合は、Driveで開いて視聴してください。</span></div></div><div class="mk-video-part"><div class="mk-video-part-head"><strong>Part 2</strong><span>Google Drive preview</span></div><div class="mk-video-embed"><iframe src="https://drive.google.com/file/d/1Gb5XNebbnbobZ6_pU3hSJgS12CX3p-59/preview" allow="autoplay; fullscreen" allowfullscreen title="Part 2"></iframe></div><div class="mk-video-foot"><span class="mk-status-pill mk-status-ok">Driveプレビュー</span><a class="mk-link-button" href="https://drive.google.com/file/d/1Gb5XNebbnbobZ6_pU3hSJgS12CX3p-59/view?usp=drivesdk" target="_blank" rel="noopener">Driveで開く</a><span class="mk-video-help">UTAGE編集画面内で再生できない場合は、Driveで開いて視聴してください。</span></div></div><div class="mk-video-part"><div class="mk-video-part-head"><strong>Part 3</strong><span>Google Drive preview</span></div><div class="mk-video-embed"><iframe src="https://drive.google.com/file/d/1Y3qRQVb4_EO42cBueCZqxkAZ4PVsVRzu/preview" allow="autoplay; fullscreen" allowfullscreen title="Part 3"></iframe></div><div class="mk-video-foot"><span class="mk-status-pill mk-status-ok">Driveプレビュー</span><a class="mk-link-button" href="https://drive.google.com/file/d/1Y3qRQVb4_EO42cBueCZqxkAZ4PVsVRzu/view?usp=drivesdk" target="_blank" rel="noopener">Driveで開く</a><span class="mk-video-help">UTAGE編集画面内で再生できない場合は、Driveで開いて視聴してください。</span></div></div><div class="mk-video-part"><div class="mk-video-part-head"><strong>Part 4</strong><span>Google Drive preview</span></div><div class="mk-video-embed"><iframe src="https://drive.google.com/file/d/1ZSXPLDL0cjadO6ggxVWKEmAHefj-Hs2S/preview" allow="autoplay; fullscreen" allowfullscreen title="Part 4"></iframe></div><div class="mk-video-foot"><span class="mk-status-pill mk-status-ok">Driveプレビュー</span><a class="mk-link-button" href="https://drive.google.com/file/d/1ZSXPLDL0cjadO6ggxVWKEmAHefj-Hs2S/view?usp=drivesdk" target="_blank" rel="noopener">Driveで開く</a><span class="mk-video-help">UTAGE編集画面内で再生できない場合は、Driveで開いて視聴してください。</span></div></div><div class="mk-video-part"><div class="mk-video-part-head"><strong>Part 5</strong><span>Google Drive preview</span></div><div class="mk-video-embed"><iframe src="https://drive.google.com/file/d/1b4oqFKSx1lMbu4cSNQPjQaQt1HzqswuN/preview" allow="autoplay; fullscreen" allowfullscreen title="Part 5"></iframe></div><div class="mk-video-foot"><span class="mk-status-pill mk-status-ok">Driveプレビュー</span><a class="mk-link-button" href="https://drive.google.com/file/d/1b4oqFKSx1lMbu4cSNQPjQaQt1HzqswuN/view?usp=drivesdk" target="_blank" rel="noopener">Driveで開く</a><span class="mk-video-help">UTAGE編集画面内で再生できない場合は、Driveで開いて視聴してください。</span></div></div><div class="mk-video-part"><div class="mk-video-part-head"><strong>Part 6</strong><span>Google Drive preview</span></div><div class="mk-video-embed"><iframe src="https://drive.google.com/file/d/1FuaTsvxNzH-6R7B39SDoGyd5k0wgKCr8/preview" allow="autoplay; fullscreen" allowfullscreen title="Part 6"></iframe></div><div class="mk-video-foot"><span class="mk-status-pill mk-status-ok">Driveプレビュー</span><a class="mk-link-button" href="https://drive.google.com/file/d/1FuaTsvxNzH-6R7B39SDoGyd5k0wgKCr8/view?usp=drivesdk" target="_blank" rel="noopener">Driveで開く</a><span class="mk-video-help">UTAGE編集画面内で再生できない場合は、Driveで開いて視聴してください。</span></div></div></article>
+        </div>
+      </div>
+    </section>
+
+    <section class="mk-section mk-section-tight">
+      <div class="mk-shell">
+        <div class="mk-section-head">
+          <p class="mk-kicker">Memo Points</p>
+          <h2>視聴中にメモするポイント</h2>
+          <p>動画を見るだけで終わらせないために、次の2つをメモしながら進めてください。特に、今どの作業に時間がかかっているかを具体的に書くことが重要です。</p>
+        </div>
+        <div class="mk-summary-grid">
+          <article class="mk-panel">
+            <h3>AI化ロードマップの起点</h3>
+            <ul>
+              <li>AIの性能差より、AIに渡す材料と時間の使い方が差を作る</li>
+              <li>作業を細かく分解し、AI化可 / 半々 / 人間のみで仕分ける</li>
+              <li>本業の業務理解を持ったままAIを入れる人が強い</li>
+              <li>AI化する前に、今どの作業に時間を使っているかを見える化する</li>
+            </ul>
+          </article>
+          <article class="mk-panel">
+            <h3>講義後にやるアウトプット</h3>
+            <ul>
+              <li>今日やった作業を10個書き出す</li>
+              <li>各作業に、かかった時間を添える</li>
+              <li>AI化可 / 半々 / 人間のみで仕分ける</li>
+              <li>成果報告チャットへ投稿して、次の改善につなげる</li>
+            </ul>
+          </article>
+        </div>
+      </div>
+    </section>
+
+    <section class="mk-section">
+      <div class="mk-shell">
+        <div class="mk-section-head">
+          <p class="mk-kicker">Next Sessions</p>
+          <h2>Day2以降の予告</h2>
+          <p>Day1で作った棚卸しを、Day2以降で仕組み化・正本管理・Skill化へつなげていきます。次に何を学ぶかだけ、ここで先に確認しておいてください。</p>
+        </div>
+        <div class="mk-upcoming-grid">
+          <article class="mk-day-card"><div class="mk-day-card-top"><span class="mk-day-chip">Day 2</span><span class="mk-status-chip">次回予告</span></div><h3>オリジナルAIシステム完全構築Camp</h3><p>自分や自社の業務に合わせて、AIを単発チャットではなく再現可能な仕組みに変える回です。入力情報、参考資料、判断基準、出力フォーマットを固定し、『使うたびに育つAI』へ寄せます。</p><p class="mk-day-note">Day1の次に扱うテーマ</p><ul><li>毎回ゼロから説明しない構造を作る</li><li>ナレッジ・テンプレ・判断基準をAIの作業前提に変換する</li><li>自分専用AIと、チームで回せるAIの分岐を明確にする</li></ul></article><article class="mk-day-card"><div class="mk-day-card-top"><span class="mk-day-chip">Day 3</span><span class="mk-status-chip">予告</span></div><h3>THE DIRECTORY</h3><p>Directory設計と正本管理に踏み込む回です。ローカル、Google Drive、ナレッジ置き場、Skillファイルの役割を切り分け、『どれが正本か分からない』状態を終わらせるための実務設計を扱います。</p><p class="mk-day-note">正本管理とDirectory設計</p><ul><li>正本を決めて、先祖返りを防ぐ保存ルールを持つ</li><li>ナレッジとSkillの置き場を混ぜない</li><li>後からAIに任せやすいディレクトリ構造にする</li></ul></article><article class="mk-day-card"><div class="mk-day-card-top"><span class="mk-day-chip">Day 4</span><span class="mk-status-chip">予告</span></div><h3>Skillsのすゝめ</h3><p>毎回のAIとのラリーを、再利用できるSkillや手順に落とし込む回です。一度うまくいった作業を言語化し、誰が使っても一定品質に寄せる運用へ変えていきます。</p><p class="mk-day-note">再現できる手順化</p><ul><li>期待する出力が出るまでデバッグし、その履歴をSkill化する</li><li>人依存のノウハウを、チームが使えるテンプレへ変える</li><li>『毎回考える』を減らし、判断の質だけに集中する</li></ul></article><article class="mk-day-card"><div class="mk-day-card-top"><span class="mk-day-chip">Day 5</span><span class="mk-status-chip">予告</span></div><h3>AI系事業の勝ち方</h3><p>AIをどう事業収益に変えるかを扱う回です。自分の既存スキルにAIを掛け合わせる道、本業のAI担当になる道、クライアントワークへ展開する道を整理し、勝ち筋を見極めます。</p><p class="mk-day-note">AIを収益に変える考え方</p><ul><li>AIだけで職種変更するのではなく、既存スキルにAIを載せる</li><li>学生・ゼロイチ層は副業受託やインターン起点が強い</li><li>2026年中に『業界 × AI』のポジションを取る考え方を持つ</li></ul></article><article class="mk-day-card"><div class="mk-day-card-top"><span class="mk-day-chip">Day 6</span><span class="mk-status-chip">予告</span></div><h3>AI時代のセキュリティ対策完全攻略Camp</h3><p>APIキー、権限、拡張機能、ローカル作業、社内利用時の運用など、AI活用を継続可能にするためのセキュリティ実務を扱う回です。</p><p class="mk-day-note">安全にAIを使う前提作り</p><ul><li>便利さだけでツールを足さず、権限と公開範囲を確認する</li><li>Drive / ローカル / 同期の使い分けを決める</li><li>社内導入やクライアント案件で事故を起こさない前提を揃える</li></ul></article><article class="mk-day-card"><div class="mk-day-card-top"><span class="mk-day-chip">Final</span><span class="mk-status-chip">実践予告</span></div><h3>最終日 東京作業会・実践共有</h3><p>7日間で作ったAI事業ラインを実際の行動へ移すための実践回です。作業会、壁打ち、成果共有、横のつながりを通じて、『聞いて終わり』ではなく『その場で進める』状態を作ります。</p><p class="mk-day-note">作業会・成果共有</p><ul><li>毎日セミナーの内容を自分の事業へ接続する</li><li>成果報告と実践共有で次の打ち手を明確にする</li><li>仲間・講師・運営との接点を持ち、継続の推進力に変える</li></ul></article>
+        </div>
+      </div>
+    </section>
+
+    <section class="mk-section">
+      <div class="mk-shell">
+        <div class="mk-section-head">
+          <p class="mk-kicker">Q&amp;A</p>
+          <h2>Day1でよく出る質問</h2>
+          <p>アーカイブ視聴時に迷いやすい点だけをまとめています。動画を見ながら不明点が出たら、まずここを確認してください。</p>
+        </div>
+        <div class="mk-qa-grid">
+          <article class="mk-qa-card"><div class="mk-qa-index"><span>Q1</span><small>アーカイブ</small></div><div class="mk-qa-body"><h3>欠席した回は後から見返せますか？</h3><p>はい。Part 1〜6からDay1録画を見返せます。UTAGE編集画面内でDriveプレビューが止まる場合は、各パートの『Driveで開く』ボタンから別タブで視聴してください。</p></div></article><article class="mk-qa-card"><div class="mk-qa-index"><span>Q2</span><small>アウトプット</small></div><div class="mk-qa-body"><h3>Day1で最初にやるべきアウトプットは何ですか？</h3><p>今日やった作業を10個書き出し、それぞれに所要時間を添えてください。そのうえで『AI化可 / 半々 / 人間のみ』に仕分けるところまでがDay1の実践です。</p></div></article><article class="mk-qa-card"><div class="mk-qa-index"><span>Q3</span><small>仕事分解</small></div><div class="mk-qa-body"><h3>9割の仕事をAI化するには、どこから見直せばいいですか？</h3><p>まずはツール選定ではなく、仕事を細かく分解することです。リサーチ、企画、構成、文章作成、資料化、チェック、投稿、改善のように分けると、AIに渡せる部分が見えます。</p></div></article><article class="mk-qa-card"><div class="mk-qa-index"><span>Q4</span><small>仕分け</small></div><div class="mk-qa-body"><h3>AI化可 / 半々 / 人間のみは、どう判断すればいいですか？</h3><p>情報整理や初稿作成のように正解条件を渡せる仕事はAI化しやすく、最終判断や顧客理解が必要な仕事は人間が残す前提で考えます。迷うものは半々に置き、次回以降で自動化度を上げます。</p></div></article><article class="mk-qa-card"><div class="mk-qa-index"><span>Q5</span><small>一次情報</small></div><div class="mk-qa-body"><h3>AI駆動型マーケティングで最初に整える材料は何ですか？</h3><p>商品、顧客、訴求、過去の投稿、実績、FAQ、講座資料など、AIに判断させるための一次情報です。材料が薄いままAIを使うと、出力も一般論に寄ります。</p></div></article><article class="mk-qa-card"><div class="mk-qa-index"><span>Q6</span><small>スライド</small></div><div class="mk-qa-body"><h3>スライドは後から見返せますか？</h3><p>Day1スライドはアーカイブページ内の講義概要と合わせて見返す前提です。動画とセットで確認すると、全体像、仕事分解、AI化ロードマップの順番が追いやすくなります。</p></div></article>
+        </div>
+      </div>
+    </section>
+
+    <section class="mk-section mk-section-tight">
+      <div class="mk-shell">
+        <div class="mk-section-head">
+          <p class="mk-kicker">Next Action</p>
+          <h2>スライド・質問先・成果報告</h2>
+          <p>視聴後は、スライドで要点を確認し、分からないことは質問チャットへ、実践したことは成果報告チャットへ投稿してください。</p>
+        </div>
+        <div class="mk-support-grid">
+          <article class="mk-support-card"><h3>Day1スライド</h3><p>たった1回で全体像を掴む AI駆動型マーケティング大全の講義スライドです。</p><a href="https://docs.google.com/presentation/d/1YVs_5tF4ObJvq-sG2XxAYr33ZecCbxf382BxVLSYkrg/edit?slide=id.g3e457e0adbb_0_0#slide=id.g3e457e0adbb_0_0" target="_blank" rel="noopener">開く</a></article><article class="mk-support-card"><h3>AIマーケ講座イベントカレンダー</h3><p>LIVEセミナー、オフ会、作業会の直近予定をまとめたカレンダーです。</p><a href="https://calendar.google.com/calendar/u/0?cid=Njc3YjBjNzJiMmEyY2RiYTg0MWFkY2Y4OTc5YWE5ZjIyMjBiNGVlNTRjZDAwNjQ5YWRlNGE5MTJlY2IzMjZiY0Bncm91cC5jYWxlbmRhci5nb29nbGUuY29t" target="_blank" rel="noopener">開く</a></article><article class="mk-support-card"><h3>質問チャット</h3><p>AIや実装の質問はここへ集約します。全体連絡ではなく、質問チャットを使う前提です。</p><a href="https://www.chatwork.com/g/n80fpoujac70bv" target="_blank" rel="noopener">開く</a></article><article class="mk-support-card"><h3>成果報告チャット</h3><p>小さな進捗でもここで共有し、次の打ち手へ変えていきます。</p><a href="https://www.chatwork.com/g/4mdakg236ufwwl" target="_blank" rel="noopener">開く</a></article><article class="mk-support-card"><h3>AI情報共有チャット</h3><p>新しいAI情報、運用改善、気づきの共有に使う部屋です。</p><a href="https://www.chatwork.com/g/pchh4ihqjc1rtl" target="_blank" rel="noopener">開く</a></article><article class="mk-support-card"><h3>受講生LINE</h3><p>契約・運営・個別問い合わせ系の窓口です。</p><a href="https://sub.osaru01.jp/line/open/hsQ4ruYiziWd?mtid=m94y3rgcW4ba" target="_blank" rel="noopener">開く</a></article><article class="mk-support-card"><h3>受講生限定LINEオープンチャット</h3><p>受講生同士の交流・補助導線として使うオープンチャットです。</p><a href="https://line.me/ti/g2/kKlMq759AKJ1IAWuiFtGXeM-cSHuItl8XUYiDw?utm_source=invitation&amp;utm_medium=link_copy&amp;utm_campaign=default" target="_blank" rel="noopener">開く</a></article>
+        </div>
+      </div>
+    </section>
+
+  </main>
+
+  <footer class="mk-footer">
+    <div class="mk-shell">
+      <div class="mk-footer-box">
+        <h2>視聴後は、作業10個を成果報告へ</h2>
+        <p>Day1の目的は、AI化ロードマップの土台を作ることです。今日やった作業を10個書き出し、所要時間とAI化の仕分けを添えて、成果報告チャットへ投稿してください。</p>
+        <div class="mk-pill-row">
+          <span class="mk-pill">作業10個</span>
+          <span class="mk-pill">所要時間</span>
+          <span class="mk-pill">AI化可 / 半々 / 人間のみ</span>
+        </div>
+        <p class="mk-source-note">Day2以降は、この棚卸しをもとにAIシステム化・Directory設計・Skill化へ進みます。</p>
+      </div>
+    </div>
+  </footer>
+</div>

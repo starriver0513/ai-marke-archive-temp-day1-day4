@@ -1,0 +1,330 @@
+<!doctype html>
+<html lang="ja">
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <title>臨時ページ | 第1期 AIマーケ構築完全攻略プログラム アーカイブ</title>
+  <style>
+    @import url('https://fonts.googleapis.com/css2?family=Noto+Sans+JP:wght@400;500;700;900&family=Zen+Kaku+Gothic+New:wght@500;700;900&display=swap');
+    :root {
+      --mk-ink: #181326;
+      --mk-muted: #6f6a7d;
+      --mk-paper: #ffffff;
+      --mk-line: rgba(86, 72, 126, 0.16);
+      --mk-deep: #22153f;
+      --mk-indigo: #6554f2;
+      --mk-violet: #9b5cf6;
+      --mk-teal: #0d9488;
+      --mk-gold: #f4bc4b;
+      --mk-shadow: 0 22px 70px rgba(49, 33, 92, 0.14);
+    }
+    body {
+      margin: 0;
+      color: var(--mk-ink);
+      background: linear-gradient(180deg, #f8f5ff 0%, #ffffff 34%, #f6fbff 72%, #fff8fb 100%);
+      font-family: "Noto Sans JP", "Hiragino Sans", "Yu Gothic", "YuGothic", sans-serif;
+      line-height: 1.75;
+    }
+    * { box-sizing: border-box; }
+    a { color: inherit; text-decoration: none; }
+    .mk-shell { width: min(1120px, calc(100% - 32px)); margin: 0 auto; }
+    .mk-hero {
+      position: relative;
+      overflow: hidden;
+      color: #ffffff;
+      background: linear-gradient(135deg, #22153f 0%, #5b3fb4 48%, #0f7f7a 100%);
+      padding: 72px 0 56px;
+    }
+    .mk-hero::before,
+    .mk-hero::after {
+      content: "";
+      position: absolute;
+      border-radius: 999px;
+      filter: blur(8px);
+      opacity: 0.3;
+      pointer-events: none;
+    }
+    .mk-hero::before {
+      width: 420px;
+      height: 420px;
+      right: -140px;
+      top: -120px;
+      background: radial-gradient(circle, rgba(244, 188, 75, 0.82), rgba(244, 188, 75, 0));
+    }
+    .mk-hero::after {
+      width: 300px;
+      height: 300px;
+      left: -100px;
+      bottom: -120px;
+      background: radial-gradient(circle, rgba(83, 243, 225, 0.78), rgba(83, 243, 225, 0));
+    }
+    .mk-hero-copy { position: relative; z-index: 1; max-width: 920px; }
+    .mk-kicker {
+      margin: 0 0 12px;
+      letter-spacing: 0.14em;
+      font-size: 12px;
+      text-transform: uppercase;
+      color: rgba(255, 255, 255, 0.78);
+    }
+    .mk-section .mk-kicker { color: var(--mk-violet); }
+    h1, h2, h3 {
+      font-family: "Zen Kaku Gothic New", "Noto Sans JP", sans-serif;
+      letter-spacing: 0;
+    }
+    h1 {
+      margin: 0;
+      font-weight: 900;
+      font-size: clamp(34px, 5.6vw, 58px);
+      line-height: 1.08;
+    }
+    .mk-title-sub {
+      display: block;
+      margin-top: 12px;
+      font-size: clamp(20px, 3vw, 34px);
+      line-height: 1.25;
+      color: rgba(255, 255, 255, 0.86);
+    }
+    .mk-hero-copy p {
+      margin: 18px 0 0;
+      font-size: 17px;
+      color: rgba(255, 255, 255, 0.9);
+    }
+    .mk-pill-row, .mk-action-row {
+      display: flex;
+      flex-wrap: wrap;
+      gap: 10px;
+      margin-top: 22px;
+    }
+    .mk-pill {
+      border: 1px solid rgba(255, 255, 255, 0.24);
+      border-radius: 999px;
+      padding: 10px 14px;
+      background: rgba(255, 255, 255, 0.11);
+      font-size: 13px;
+    }
+    .mk-section { padding: 72px 0; }
+    .mk-section-tight { padding-top: 0; }
+    .mk-section-head { max-width: 760px; margin-bottom: 28px; }
+    .mk-section-head h2 {
+      margin: 0;
+      font-weight: 900;
+      font-size: clamp(28px, 4vw, 40px);
+      line-height: 1.12;
+    }
+    .mk-section-head p:last-child { margin: 14px 0 0; color: var(--mk-muted); }
+    .mk-metrics {
+      display: grid;
+      grid-template-columns: repeat(3, minmax(0, 1fr));
+      gap: 14px;
+      margin-top: 32px;
+    }
+    .mk-metric {
+      border: 1px solid rgba(255, 255, 255, 0.18);
+      border-radius: 14px;
+      padding: 18px 20px;
+      background: rgba(255, 255, 255, 0.1);
+      backdrop-filter: blur(10px);
+    }
+    .mk-metric span {
+      display: block;
+      font-size: 12px;
+      color: rgba(255, 255, 255, 0.72);
+      text-transform: uppercase;
+      letter-spacing: 0.12em;
+    }
+    .mk-metric strong {
+      display: block;
+      margin-top: 8px;
+      font-size: 24px;
+      line-height: 1.2;
+    }
+    .mk-grid {
+      display: grid;
+      grid-template-columns: repeat(2, minmax(0, 1fr));
+      gap: 18px;
+    }
+    .mk-panel, .mk-day-card {
+      background: var(--mk-paper);
+      border: 1px solid var(--mk-line);
+      border-radius: 24px;
+      box-shadow: var(--mk-shadow);
+    }
+    .mk-panel { padding: 28px; }
+    .mk-panel p { margin: 0 0 16px; color: var(--mk-muted); }
+    .mk-panel ul { margin: 0; padding-left: 18px; }
+    .mk-panel li { margin-top: 8px; }
+    .mk-day-card {
+      display: flex;
+      flex-direction: column;
+      min-height: 100%;
+      padding: 22px;
+    }
+    .mk-day-card-top {
+      display: flex;
+      align-items: flex-start;
+      justify-content: space-between;
+      gap: 12px;
+      margin-bottom: 12px;
+    }
+    .mk-day-chip, .mk-status-chip {
+      display: inline-flex;
+      align-items: center;
+      border-radius: 999px;
+      padding: 6px 10px;
+      font-size: 12px;
+      font-weight: 700;
+    }
+    .mk-day-chip { background: rgba(101, 84, 242, 0.1); color: var(--mk-indigo); }
+    .mk-status-chip { background: rgba(244, 188, 75, 0.18); color: #7a4b08; text-align: right; }
+    .mk-status-ok { background: rgba(15, 118, 110, 0.12); color: var(--mk-teal); }
+    .mk-day-card h3 {
+      margin: 0 0 12px;
+      font-weight: 800;
+      font-size: 22px;
+      line-height: 1.25;
+    }
+    .mk-day-card p { margin: 0 0 14px; color: var(--mk-muted); }
+    .mk-thumb {
+      overflow: hidden;
+      border-radius: 18px;
+      border: 1px solid var(--mk-line);
+      margin: 0 0 16px;
+      background: linear-gradient(135deg, rgba(101, 84, 242, 0.08), rgba(13, 148, 136, 0.08));
+    }
+    .mk-thumb img { display: block; width: 100%; height: auto; }
+    .mk-card-actions { margin-top: auto; padding-top: 8px; }
+    .mk-link-button {
+      display: inline-flex;
+      align-items: center;
+      justify-content: center;
+      width: 100%;
+      border-radius: 999px;
+      padding: 12px 18px;
+      background: linear-gradient(135deg, var(--mk-deep), var(--mk-indigo));
+      color: #ffffff !important;
+      font-weight: 800;
+    }
+    .mk-note {
+      background: linear-gradient(135deg, rgba(101, 84, 242, 0.08), rgba(13, 148, 136, 0.08));
+    }
+    .mk-footer { padding: 0 0 72px; }
+    .mk-footer-box {
+      border-radius: 28px;
+      padding: 28px;
+      background: linear-gradient(140deg, #22153f, #5b3fb4);
+      color: #ffffff;
+    }
+    .mk-footer-box h2 {
+      margin: 0 0 10px;
+      font-weight: 900;
+      font-size: 30px;
+      line-height: 1.15;
+    }
+    .mk-footer-box p { margin: 0; color: rgba(255, 255, 255, 0.84); }
+    @media (max-width: 900px) {
+      .mk-metrics, .mk-grid { grid-template-columns: 1fr; }
+      .mk-day-card-top { flex-direction: column; }
+    }
+  </style>
+</head>
+<body>
+  <div class="mk-archive">
+    <header class="mk-hero">
+      <div class="mk-shell">
+        <div class="mk-hero-copy">
+          <p class="mk-kicker">臨時ページ / 第1期 AIマーケ構築完全攻略プログラム</p>
+          <h1>Day1〜Day4 アーカイブ管理ページ<span class="mk-title-sub">UTAGEにログインできない方向けの一時視聴ページです</span></h1>
+          <p>UTAGE側に入れない場合でも、下の各日程ボタンからアーカイブページを開けます。正式な会員サイト導線が使える方は、通常どおりUTAGE側も併用してください。</p>
+          <div class="mk-pill-row">
+            <span class="mk-pill">臨時公開ページ</span>
+            <span class="mk-pill">Day1〜Day4対応</span>
+            <span class="mk-pill">Google Drive埋め込み</span>
+            <span class="mk-pill">スマホ視聴対応</span>
+          </div>
+          <div class="mk-metrics">
+            <article class="mk-metric"><span>公開範囲</span><strong>リンク閲覧</strong></article>
+            <article class="mk-metric"><span>収録日程</span><strong>Day1〜Day4</strong></article>
+            <article class="mk-metric"><span>用途</span><strong>UTAGE代替導線</strong></article>
+          </div>
+        </div>
+      </div>
+    </header>
+
+    <main>
+      <section class="mk-section">
+        <div class="mk-shell">
+          <div class="mk-section-head">
+            <p class="mk-kicker">Archive Links</p>
+            <h2>見たい日程を選択してください</h2>
+            <p>ボタンをタップすると、それぞれのアーカイブページへ移動します。Day1〜Day3は戻し版HTML、Day4はサムネイル入りの本編・実演Q&amp;A分割版です。</p>
+          </div>
+          <div class="mk-grid">
+            <article class="mk-day-card">
+              <div class="mk-day-card-top"><span class="mk-day-chip">Day 1</span><span class="mk-status-chip mk-status-ok">掲載済み</span></div>
+              <h3>たった1回で全体像を掴む AI駆動型マーケティング大全</h3>
+              <p>AI化ロードマップの土台を作る回です。作業10個の棚卸し、所要時間の見える化、AI化可 / 半々 / 人間のみの仕分けを確認できます。</p>
+              <div class="mk-card-actions"><a class="mk-link-button" href="./day1.html">Day1アーカイブを見る</a></div>
+            </article>
+
+            <article class="mk-day-card">
+              <div class="mk-day-card-top"><span class="mk-day-chip">Day 2</span><span class="mk-status-chip mk-status-ok">掲載済み</span></div>
+              <h3>オリジナルAIシステム完全構築Camp</h3>
+              <p>AIを単発チャットから、自分のPC・フォルダ・ルール・API・Skillにつながる業務環境へ変える回です。</p>
+              <div class="mk-card-actions"><a class="mk-link-button" href="./day2.html">Day2アーカイブを見る</a></div>
+            </article>
+
+            <article class="mk-day-card">
+              <div class="mk-day-card-top"><span class="mk-day-chip">Day 3</span><span class="mk-status-chip mk-status-ok">掲載済み</span></div>
+              <h3>THE DIRECTORY</h3>
+              <p>AIが迷わないフォルダ構造と正本管理を作る回です。directory.md、CLAUDE.md、ローカルとDriveの使い分けを確認できます。</p>
+              <div class="mk-card-actions"><a class="mk-link-button" href="./day3.html">Day3アーカイブを見る</a></div>
+            </article>
+
+            <article class="mk-day-card">
+              <div class="mk-day-card-top"><span class="mk-day-chip">Day 4</span><span class="mk-status-chip mk-status-ok">サムネ入り</span></div>
+              <div class="mk-thumb"><img src="https://lh3.googleusercontent.com/d/1RFjO4lliouKqtAomGkSFE1Gqm1VAUyTG=w1200" alt="Day4 Skillsのすゝめ サムネイル"></div>
+              <h3>Skillsのすゝめ</h3>
+              <p>本編パートと実演 &amp; Q&amp;Aパートを分けて確認できます。Skill化の考え方、実演、質問回答まで追える構成です。</p>
+              <div class="mk-card-actions"><a class="mk-link-button" href="./day4.html">Day4アーカイブを見る</a></div>
+            </article>
+          </div>
+        </div>
+      </section>
+
+      <section class="mk-section mk-section-tight">
+        <div class="mk-shell">
+          <div class="mk-grid">
+            <article class="mk-panel mk-note">
+              <h3>使い方</h3>
+              <ul>
+                <li>UTAGEにログインできない場合は、このページから各日程へ進んでください。</li>
+                <li>動画がページ内で再生できない場合は、各ページ内の「Driveで開く」ボタンから視聴してください。</li>
+                <li>正式導線が復旧している場合は、UTAGE側のアーカイブページも通常どおり使えます。</li>
+              </ul>
+            </article>
+            <article class="mk-panel">
+              <h3>掲載内容</h3>
+              <p>この臨時ページは、受講生がアーカイブ視聴を止めずに進めるための一時導線です。Day4までのアーカイブだけをまとめています。</p>
+              <ul>
+                <li>Day1: 6パート掲載</li>
+                <li>Day2: 1本掲載</li>
+                <li>Day3: 1本掲載</li>
+                <li>Day4: 本編 / 実演&amp;Q&amp;Aの2本掲載</li>
+              </ul>
+            </article>
+          </div>
+        </div>
+      </section>
+    </main>
+
+    <footer class="mk-footer">
+      <div class="mk-shell">
+        <div class="mk-footer-box">
+          <h2>UTAGEに入れない場合は、このページをブックマークしてください</h2>
+          <p>Day1〜Day4のアーカイブ視聴導線をまとめています。視聴後は、各日のワーク・成果報告まで進めてください。</p>
+        </div>
+      </div>
+    </footer>
+  </div>
+</body>
+</html>
